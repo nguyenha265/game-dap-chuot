@@ -21,30 +21,30 @@
 <script charset="UTF-8">
     let ve = document.getElementById("a");
     let ctx = ve.getContext("2d");
-    let chuot = function (toadox, toadoy) {
-        this.toadox = toadox;
-        this.toadoy = toadoy;
-        this.settoadox = function (toadox) {
-            this.toadox = toadox
+    let chuot = function (toaDoX, toaDoY) {
+        this.toaDoX = toaDoX;
+        this.toaDoY = toaDoY;
+        this.setToaDoX = function (toaDoX) {
+            this.toaDoX = toaDoX
         };
-        this.settoadoy = function (toadoy) {
-            this.toadoy = toadoy
+        this.setToaDoY = function (toaDoY) {
+            this.toaDoY = toaDoY
         };
-        this.gettoadox = function () {
-            return this.toadox
+        this.getToaDoX = function () {
+            return this.toaDoX
         };
-        this.gettoadoy = function () {
-            return this.toadoy
+        this.getToaDoY = function () {
+            return this.toaDoY
         };
         this.veChuot = function () {
             let anhChuot = new Image();
             ctx.beginPath();
             anhChuot.src = "kero.png";
-            ctx.drawImage(anhChuot, this.toadox, this.toadoy, 150, 130);
+            ctx.drawImage(anhChuot, this.toaDoX, this.toaDoY, 150, 130);
             ctx.closePath();
         };
     };
-    let chuotbach = new chuot(375, 308);
+    let chuotBach = new chuot(375, 308);
     let mangx = [70, 375, 675];
     let mangy = [-15, 145, 308];
     let diem = 0;
@@ -52,13 +52,13 @@
     let mang = 30;
 
     function suLyDapBua(e) {
-        if (chuotbach.gettoadox() < e.clientX && chuotbach.gettoadox() + 150 > e.clientX &&
-            chuotbach.gettoadoy() < e.clientY) {
+        if (chuotBach.getToaDoX() < e.clientX && chuotBach.getToaDoX() + 150 > e.clientX &&
+            chuotBach.getToaDoY() < e.clientY) {
             diem++;
             ctx.clearRect(0, 0, ve.width, ve.height);
             tiengbua();
             hieuung();
-            chuotbach.settoadox(-500);
+            chuotBach.setToaDoX(-500);
 
         } else {
             mang--;
@@ -75,20 +75,27 @@
         let anhhieuung = new Image();
         ctx.beginPath();
         anhhieuung.src = "pow.png";
-        ctx.drawImage(anhhieuung, chuotbach.toadox+25, chuotbach.toadoy,100,100);
+        ctx.drawImage(anhhieuung, chuotBach.toaDoX+25, chuotBach.toaDoY,100,100);
         ctx.closePath();
     }
     function kiemtraThangThua() {
         clearInterval(ab);
         switch (diem) {
             case 10:
-            case 20:
-            case 30:
-            case 40:
-            case 50:
-                time -= 200;
+                time = 800;
                 break;
-
+            case 20:
+                time = 700;
+                break;
+            case 30:
+                time = 600;
+                break;
+            case 40:
+                time= 500;
+                break;
+            case 50:
+                time = 400;
+                break;
         }
         if (mang === 0) {
             document.write("Game over")
@@ -114,9 +121,9 @@
     }
     function run1() {
         ctx.clearRect(0, 0, ve.width, ve.height);
-        chuotbach.settoadox(mangx[Math.floor(Math.random() * 3)]);
-        chuotbach.settoadoy(mangy[Math.floor(Math.random() * 3)]);
-        chuotbach.veChuot();
+        chuotBach.setToaDoX(mangx[Math.floor(Math.random() * 3)]);
+        chuotBach.setToaDoY(mangy[Math.floor(Math.random() * 3)]);
+        chuotBach.veChuot();
     }
     let ab= setInterval(run1, time);
     document.addEventListener("click", suLyDapBua);
